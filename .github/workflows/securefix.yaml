@@ -20,5 +20,6 @@ jobs:
         with:
           outputs: ${{ toJson(steps.prepare.outputs) }}
       - uses: securefix-action/action/server/notify@main
+        if: failure()
         with:
           outputs: ${{ toJson(steps.prepare.outputs) }}

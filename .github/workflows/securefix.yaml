@@ -12,15 +12,15 @@ jobs:
     # environment: main
     permissions: {}
     steps:
-      - uses: securefix-action/action/server/prepare@main
+      - uses: securefix-action/action/server/prepare@c5696e3325f3906c5054ad80f3b9cdd92d65173b # v0.1.0
         id: prepare
         with:
           app_id: ${{ vars.DEMO_SERVER_APP_ID }}
           app_private_key: ${{ secrets.DEMO_SERVER_PRIVATE_KEY }}
-      - uses: securefix-action/action/server/commit@main
+      - uses: securefix-action/action/server/commit@c5696e3325f3906c5054ad80f3b9cdd92d65173b # v0.1.0
         with:
           outputs: ${{ toJson(steps.prepare.outputs) }}
-      - uses: securefix-action/action/server/notify@main
+      - uses: securefix-action/action/server/notify@c5696e3325f3906c5054ad80f3b9cdd92d65173b # v0.1.0
         if: failure()
         with:
           outputs: ${{ toJson(steps.prepare.outputs) }}

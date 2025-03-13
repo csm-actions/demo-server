@@ -1,0 +1,23 @@
+---
+name: Fix
+on:
+  label:
+    types:
+      - created
+jobs:
+  fix:
+    if: startsWith(github.event.label.name, 'securefix-')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions: {}
+    steps:
+      - uses: securefix-action/action/server/prepare@main
+        id: prepare
+        with:
+          app_id: ${{ vars.DEMO_SERVER_APP_ID }}
+          app_private_key: ${{ secrets.DEMO_SERVER_PRIVATE_KEY }}
+      - uses: securefix-action/action/server/commit@main
+        with:
+          app_id: ${{ vars.DEMO_SERVER_APP_ID }}
+          app_private_key: ${{ secrets.DEMO_SERVER_PRIVATE_KEY }}
+          outputs: ${{ toJson(steps.prepare.outputs) }}

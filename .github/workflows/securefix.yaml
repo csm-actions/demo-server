@@ -24,3 +24,15 @@ jobs:
         if: failure()
         with:
           outputs: ${{ toJson(steps.prepare.outputs) }}
+
+  update_branch:
+    if: startsWith(github.event.label.name, 'update-branch-')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    # environment: main
+    permissions: {}
+    steps:
+      - uses: securefix-action/update-branch-action/server@feat-first-pr
+        with:
+          app_id: ${{ vars.DEMO_SERVER_APP_ID }}
+          app_private_key: ${{ secrets.DEMO_SERVER_PRIVATE_KEY }}

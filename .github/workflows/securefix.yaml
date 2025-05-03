@@ -27,6 +27,7 @@ jobs:
 
   update_branch:
     if: startsWith(github.event.label.name, 'update-branch-')
+    name: Update Branch (${{ github.event.label.description }})
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     # environment: main

@@ -1,5 +1,6 @@
 ---
 name: Fix
+run-name: Fix (${{ github.event.label.name }})
 on:
   label:
     types:

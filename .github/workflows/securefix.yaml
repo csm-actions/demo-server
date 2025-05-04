@@ -47,7 +47,7 @@ jobs:
     environment: main
     permissions: {}
     steps:
-      - uses: securefix-action/pr-approve-action/server@feat-first-pr
+      - uses: securefix-action/approve-pr-action/server@feat-first-pr
         with:
           github_token: ${{ secrets.PR_APPROVE_GITHUB_ACCESS_TOKEN }}
           allowed_committers: |

@@ -57,7 +57,7 @@ jobs:
           repository_owner: ${{ steps.pr.outputs.repository_owner }}
           repository_name: ${{ steps.pr.outputs.repository_name }}
       - uses: securefix-action/approve-pr-action/approve@split-actions
-        if: steps.validate.outputs.valid == 'true'
+        if: steps.validate.outputs.approved == 'true'
         with:
           github_token: ${{ secrets.PR_APPROVE_GITHUB_ACCESS_TOKEN }}
           pull_request_number: ${{ steps.pr.outputs.pull_request_number }}

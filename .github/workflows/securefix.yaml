@@ -34,7 +34,7 @@ jobs:
     # environment: main
     permissions: {}
     steps:
-      - uses: securefix-action/update-branch-action/server@feat-first-pr
+      - uses: securefix-action/update-branch-action/server@319069aa30b0b96fbf909a6565b39d6da4d2ab32 # v0.0.1
         with:
           app_id: ${{ vars.DEMO_SERVER_APP_ID }}
           app_private_key: ${{ secrets.DEMO_SERVER_PRIVATE_KEY }}

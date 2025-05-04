@@ -61,6 +61,6 @@ jobs:
         with:
           github_token: ${{ secrets.PR_APPROVE_GITHUB_ACCESS_TOKEN }}
           pull_request_number: ${{ steps.pr.outputs.pull_request_number }}
-          sha: ${{ steps.pr.outputs.approve_sha }}
+          sha: ${{ steps.pr.outputs.approved_sha }}
           repository_owner: ${{ steps.pr.outputs.repository_owner }}
           repository_name: ${{ steps.pr.outputs.repository_name }}

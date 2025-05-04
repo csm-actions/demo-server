@@ -38,3 +38,17 @@ jobs:
         with:
           app_id: ${{ vars.DEMO_SERVER_APP_ID }}
           app_private_key: ${{ secrets.DEMO_SERVER_PRIVATE_KEY }}
+
+  approve:
+    if: startsWith(github.event.label.name, 'approve-pr-')
+    name: Approve Pull Request (${{ github.event.label.description }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: main
+    permissions: {}
+    steps:
+      - uses: securefix-action/pr-approve-action/server@feat-first-pr
+        with:
+          github_token: ${{ secrets.PR_APPROVE_GITHUB_ACCESS_TOKEN }}
+          allowed_committers: |
+            renovate[bot]

@@ -47,8 +47,6 @@ jobs:
     environment: main
     permissions: {}
     steps:
-      - uses: securefix-action/approve-pr-action/server@feat-first-pr
+      - uses: securefix-action/approve-pr-action/server@2cdfc193f1817713909314429fd7a073c6f700ac # v0.0.1
         with:
           github_token: ${{ secrets.PR_APPROVE_GITHUB_ACCESS_TOKEN }}
-          allowed_committers: |
-            renovate[bot]

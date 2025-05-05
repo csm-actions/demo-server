@@ -14,6 +14,8 @@ jobs:
     environment: main
     permissions: {}
     steps:
-      - uses: securefix-action/approve-pr-action/server@merge-actions
+      - uses: securefix-action/approve-pr-action/server@require-server-app
         with:
           github_token: ${{ secrets.PR_APPROVE_GITHUB_ACCESS_TOKEN }}
+          app_id: ${{ vars.DEMO_SERVER_APP_ID }}
+          app_private_key: ${{ secrets.DEMO_SERVER_PRIVATE_KEY }}

@@ -11,7 +11,7 @@ jobs:
     name: Update Branch (${{ github.event.label.description }})
     runs-on: ubuntu-24.04
     timeout-minutes: 10
-    # environment: main
+    environment: main
     permissions: {}
     steps:
       - uses: csm-actions/update-branch-action/server@49cbdc4eb09d785872ff68c4f93f363606350b0f # v0.1.0

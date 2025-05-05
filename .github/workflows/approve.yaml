@@ -1,0 +1,19 @@
+---
+name: Approve Pull Request
+run-name: Approve Pull Request (${{ github.event.label.name }})
+on:
+  label:
+    types:
+      - created
+jobs:
+  approve:
+    if: startsWith(github.event.label.name, 'approve-pr-')
+    name: Approve Pull Request (${{ github.event.label.description }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: main
+    permissions: {}
+    steps:
+      - uses: securefix-action/approve-pr-action/server@merge-actions
+        with:
+          github_token: ${{ secrets.PR_APPROVE_GITHUB_ACCESS_TOKEN }}

@@ -10,7 +10,7 @@ jobs:
     if: startsWith(github.event.label.name, 'securefix-')
     runs-on: ubuntu-24.04
     timeout-minutes: 10
-    # environment: main
+    environment: main
     permissions: {}
     steps:
       - uses: csm-actions/securefix-action/server/prepare@c5696e3325f3906c5054ad80f3b9cdd92d65173b # v0.1.0

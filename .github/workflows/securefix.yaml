@@ -11,17 +11,25 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     environment: main
-    permissions: {}
+    permissions:
+      issues: write # To delete labels
     steps:
-      - uses: csm-actions/securefix-action/server/prepare@758a17e6f52a70ab0d8102ef1cd13cd0107206e6 # v0.2.0
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            securefix-action.yaml
+          sparse-checkout-cone-mode: false
+      - uses: csm-actions/securefix-action/server/prepare@88b0ac73776233f648080baf9e8e103377db2fb2 # v0.2.1
         id: prepare
         with:
           app_id: ${{ vars.DEMO_SERVER_APP_ID }}
           app_private_key: ${{ secrets.DEMO_SERVER_PRIVATE_KEY }}
-      - uses: csm-actions/securefix-action/server/commit@758a17e6f52a70ab0d8102ef1cd13cd0107206e6 # v0.2.0
+          config_file: securefix-action.yaml
+      - uses: csm-actions/securefix-action/server/commit@88b0ac73776233f648080baf9e8e103377db2fb2 # v0.2.1
         with:
           outputs: ${{ toJson(steps.prepare.outputs) }}
-      - uses: csm-actions/securefix-action/server/notify@758a17e6f52a70ab0d8102ef1cd13cd0107206e6 # v0.2.0
+      - uses: csm-actions/securefix-action/server/notify@88b0ac73776233f648080baf9e8e103377db2fb2 # v0.2.1
         if: failure()
         with:
           outputs: ${{ toJson(steps.prepare.outputs) }}

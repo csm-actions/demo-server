@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
-      - uses: csm-actions/securefix-action/js@88b0ac73776233f648080baf9e8e103377db2fb2 # v0.2.1
+      - uses: csm-actions/securefix-action/js@05036cda4e1fcaeba401d23261056048fe20ba27 # v0.2.2
         with:
           action: validate-config
           config_file: securefix-action.yaml

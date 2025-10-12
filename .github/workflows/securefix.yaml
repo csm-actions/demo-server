@@ -20,16 +20,16 @@ jobs:
           sparse-checkout: |
             securefix-action.yaml
           sparse-checkout-cone-mode: false
-      - uses: csm-actions/securefix-action/server/prepare@4e27e086ba88a35d19bbae25faeabb769d774653 # v0.3.1
+      - uses: csm-actions/securefix-action/server/prepare@7631c011cad178ac45d0580119ab838c97af6908 # v0.3.2
         id: prepare
         with:
           app_id: ${{ vars.DEMO_SERVER_APP_ID }}
           app_private_key: ${{ secrets.DEMO_SERVER_PRIVATE_KEY }}
           config_file: securefix-action.yaml
-      - uses: csm-actions/securefix-action/server/commit@4e27e086ba88a35d19bbae25faeabb769d774653 # v0.3.1
+      - uses: csm-actions/securefix-action/server/commit@7631c011cad178ac45d0580119ab838c97af6908 # v0.3.2
         with:
           outputs: ${{ toJson(steps.prepare.outputs) }}
-      - uses: csm-actions/securefix-action/server/notify@4e27e086ba88a35d19bbae25faeabb769d774653 # v0.3.1
+      - uses: csm-actions/securefix-action/server/notify@7631c011cad178ac45d0580119ab838c97af6908 # v0.3.2
         if: failure()
         with:
           outputs: ${{ toJson(steps.prepare.outputs) }}

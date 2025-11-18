@@ -8,7 +8,7 @@ on:
 jobs:
   fix:
     if: startsWith(github.event.label.name, 'securefix-')
-    runs-on: ubuntu-slim # ubuntu-slim is suitable for securefix-action server workflows beucase it completes faster and uses less resources.
+    runs-on: ubuntu-slim # ubuntu-slim is suitable for securefix-action server workflows beucase they complete faster and use less resources.
     timeout-minutes: 10
     environment: main
     permissions:

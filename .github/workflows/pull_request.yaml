@@ -8,10 +8,17 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
-        with:
-          persist-credentials: false
-      - uses: csm-actions/securefix-action/js@4f3e711a06d7d5a3f5527cc622f6c75362fec74b # v0.3.6
+      - name: Get a configuration file
+        env:
+          GH_TOKEN: ${{github.token}}
+        # Downloading a file using GitHub CLI is faster than using actions/checkout
+        run: |
+          gh api \
+            -H "Accept: application/vnd.github.object" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "/repos/${GITHUB_REPOSITORY}/contents/securefix-action.yaml" \
+          --jq ".content" | base64 -d > securefix-action.yaml
+      - uses: csm-actions/securefix-action@949d3cfb554abee10f695014674759978ba8ba34 # v0.4.1
         with:
           action: validate-config
           config_file: securefix-action.yaml

@@ -8,28 +8,25 @@ on:
 jobs:
   fix:
     if: startsWith(github.event.label.name, 'securefix-')
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-slim # ubuntu-slim is suitable for securefix-action server workflows beucase it completes faster and uses less resources.
     timeout-minutes: 10
     environment: main
     permissions:
       issues: write # To delete labels
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - name: Get a configuration file
+        env:
+          GH_TOKEN: ${{github.token}}
+        # Downloading a file using GitHub CLI is faster than using actions/checkout
+        run: |
+          gh api \
+            -H "Accept: application/vnd.github.object" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "/repos/${GITHUB_REPOSITORY}/contents/config.yaml" \
+          --jq ".content" | base64 -d > securefix-action.yaml
+      - uses: csm-actions/securefix-action@949d3cfb554abee10f695014674759978ba8ba34 # v0.4.1
         with:
-          persist-credentials: false
-          sparse-checkout: |
-            securefix-action.yaml
-          sparse-checkout-cone-mode: false
-      - uses: csm-actions/securefix-action/server/prepare@4f3e711a06d7d5a3f5527cc622f6c75362fec74b # v0.3.6
-        id: prepare
-        with:
+          action: server
           app_id: ${{ vars.DEMO_SERVER_APP_ID }}
           app_private_key: ${{ secrets.DEMO_SERVER_PRIVATE_KEY }}
           config_file: securefix-action.yaml
-      - uses: csm-actions/securefix-action/server/commit@4f3e711a06d7d5a3f5527cc622f6c75362fec74b # v0.3.6
-        with:
-          outputs: ${{ toJson(steps.prepare.outputs) }}
-      - uses: csm-actions/securefix-action/server/notify@4f3e711a06d7d5a3f5527cc622f6c75362fec74b # v0.3.6
-        if: failure()
-        with:
-          outputs: ${{ toJson(steps.prepare.outputs) }}

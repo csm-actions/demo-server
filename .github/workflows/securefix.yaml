@@ -22,7 +22,7 @@ jobs:
           gh api \
             -H "Accept: application/vnd.github.object" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            "/repos/${GITHUB_REPOSITORY}/contents/config.yaml" \
+            "/repos/${GITHUB_REPOSITORY}/contents/securefix-action.yaml" \
           --jq ".content" | base64 -d > securefix-action.yaml
       - uses: csm-actions/securefix-action@949d3cfb554abee10f695014674759978ba8ba34 # v0.4.1
         with:

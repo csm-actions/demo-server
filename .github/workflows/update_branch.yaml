@@ -1,6 +1,6 @@
 ---
 name: Update Branch
-run-name: Update Branch (${{ github.event.label.name }})
+run-name: Update Branch (${{ github.event.label.description }})
 on:
   label:
     types:

@@ -18,7 +18,7 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "/repos/${GITHUB_REPOSITORY}/contents/securefix-action.yaml" \
           --jq ".content" | base64 -d > securefix-action.yaml
-      - uses: csm-actions/securefix-action@4f7ffeec7d4c51baceca5bf6c16972f5bb2205f7 # v0.6.7
+      - uses: csm-actions/securefix-action@6da661e4377faf2d71294c1c09b1c03c161ce7c1 # v0.6.8
         with:
           action: validate-config
           config_file: securefix-action.yaml

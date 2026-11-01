@@ -19,10 +19,8 @@ jobs:
     steps:
       # The inputs repository_owner, repository_name, and pull_request_number
       # are read from the workflow_dispatch event.
-      - uses: csm-actions/approve-pr-action@pr/526
+      - uses: csm-actions/approve-pr-action@000639bc62037626041db99bfc464fe7dee2f5c6 # v1.1.0
         with:
           github_token: ${{ secrets.PR_APPROVE_GITHUB_ACCESS_TOKEN }}
           app_id: ${{ vars.DEMO_SERVER_APP_ID }}
           app_private_key: ${{ secrets.DEMO_SERVER_PRIVATE_KEY }}
-          # Temporarily allow suzuki-shunsuke to test csm-actions/approve-pr-action#526
-          allowed_committers: suzuki-shunsuke

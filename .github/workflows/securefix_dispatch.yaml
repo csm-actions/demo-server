@@ -1,0 +1,40 @@
+---
+name: Fix (workflow_dispatch)
+run-name: Fix (${{ inputs.client_repository_owner }}/${{ inputs.client_repository_name }})
+on:
+  workflow_dispatch:
+    inputs:
+      client_repository_owner:
+        required: true
+      client_repository_name:
+        required: true
+      client_workflow_run_id:
+        required: true
+      artifact_name:
+        required: true
+jobs:
+  fix:
+    runs-on: ubuntu-slim # ubuntu-slim is suitable for securefix-action server workflows because they complete faster and use less resources.
+    timeout-minutes: 10
+    environment: main
+    permissions:
+      contents: read # To read the configuration file
+    steps:
+      - name: Get a configuration file
+        env:
+          GH_TOKEN: ${{github.token}}
+        # Downloading a file using GitHub CLI is faster than using actions/checkout
+        run: |
+          gh api \
+            -H "Accept: application/vnd.github.object" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "/repos/${GITHUB_REPOSITORY}/contents/securefix-action.yaml" \
+          --jq ".content" | base64 -d > securefix-action.yaml
+      # The inputs client_repository_owner, client_repository_name, client_workflow_run_id, and artifact_name
+      # are read from the workflow_dispatch event by default.
+      - uses: csm-actions/securefix-action@pr/896
+        with:
+          action: server
+          app_id: ${{ vars.DEMO_SERVER_APP_ID }}
+          app_private_key: ${{ secrets.DEMO_SERVER_PRIVATE_KEY }}
+          config_file: securefix-action.yaml

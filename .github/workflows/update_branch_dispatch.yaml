@@ -19,7 +19,7 @@ jobs:
     steps:
       # The inputs repository_owner, repository_name, and pull_request_number
       # are read from the workflow_dispatch event.
-      - uses: csm-actions/update-branch-action@pr/603
+      - uses: csm-actions/update-branch-action@9b6108a09188c55f18054cbfa05cfdabcf648602 # v1.2.0
         with:
           app_id: ${{ vars.DEMO_SERVER_APP_ID }}
           app_private_key: ${{ secrets.DEMO_SERVER_PRIVATE_KEY }}

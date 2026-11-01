@@ -1,6 +1,6 @@
 ---
 name: Fix (workflow_dispatch)
-run-name: Fix (${{ inputs.client_repository_owner }}/${{ inputs.client_repository_name }})
+run-name: Fix (${{ inputs.client_repository_owner }}/${{ inputs.client_repository_name }}/${{ inputs.client_workflow_run_id }})
 on:
   workflow_dispatch:
     inputs:

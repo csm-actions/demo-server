@@ -9,7 +9,7 @@ jobs:
   approve:
     if: startsWith(github.event.label.name, 'approve-pr-')
     name: Approve Pull Request (${{ github.event.label.description }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     environment: main
     permissions: {}

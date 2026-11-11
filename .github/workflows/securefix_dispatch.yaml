@@ -32,7 +32,7 @@ jobs:
           --jq ".content" | base64 -d > securefix-action.yaml
       # The inputs client_repository_owner, client_repository_name, client_workflow_run_id, and artifact_name
       # are read from the workflow_dispatch event by default.
-      - uses: csm-actions/securefix-action@6da661e4377faf2d71294c1c09b1c03c161ce7c1 # v0.6.8
+      - uses: csm-actions/securefix-action@597f2bef80011eacf418a3135c10c3ab7f24af7a # v0.6.9
         with:
           action: server
           app_id: ${{ vars.DEMO_SERVER_APP_ID }}
